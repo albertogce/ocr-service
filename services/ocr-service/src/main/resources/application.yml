@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8082
 
 #spring:
 #  rabbitmq:
@@ -19,7 +19,7 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: "*"
-        spring.json.value.default.type: com.docstream.ocrservice.dto.DocumentProcessingEvent
+        spring.json.value.default.type: com.docstream.commondata.dto.DocumentProcessingEvent
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer

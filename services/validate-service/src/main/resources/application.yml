@@ -1,0 +1,37 @@
+server:
+  port: 8084
+
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+  kafka:
+#    bootstrap-servers: host.docker.internal:9092
+    consumer:
+      group-id: validate-consumer-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+        spring.json.value.default.type: com.docstream.commondata.dto.DocumentProcessingEvent
+        spring.json.use.type.headers: false # Omite las cabeceras, entre ellas type, que indica una ruta distinta para DocumentProcessingEvent
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+docstream:
+  topics:
+    input: validated-documents
+    output: store-documents
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  endpoint:
+    prometheus:
+      enabled: true

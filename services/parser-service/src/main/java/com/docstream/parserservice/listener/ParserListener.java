@@ -1,6 +1,6 @@
 package com.docstream.parserservice.listener;
 
-import com.docstream.parserservice.dto.DocumentProcessingEvent;
+import com.docstream.commondata.dto.DocumentProcessingEvent;
 import com.docstream.parserservice.service.ReactiveDocumentParsingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

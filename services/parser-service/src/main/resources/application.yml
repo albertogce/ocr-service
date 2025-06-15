@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: 8083
 
 #spring:
 #  rabbitmq:
@@ -17,7 +17,7 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: "*"
-        spring.json.value.default.type: com.docstream.parserservice.dto.DocumentProcessingEvent
+        spring.json.value.default.type: com.docstream.commondata.dto.DocumentProcessingEvent
         spring.json.use.type.headers: false # Omite las cabeceras, entre ellas type, que indica una ruta distinta para DocumentProcessingEvent
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer

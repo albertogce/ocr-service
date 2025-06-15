@@ -1,21 +1,15 @@
 FROM openjdk:21-slim
 
-# Instala dependencias necesarias: Maven, Tesseract y español
-RUN apt-get update && \
-    apt-get install -y maven tesseract-ocr tesseract-ocr-spa git && \
-    apt-get clean
-
-# Crea directorio de trabajo
+# Crea el directorio de trabajo
 WORKDIR /app
 
-# Copia el código fuente del microservicio OCR
-COPY services/ocr-service /app
+# # Instala Maven, Tesseract, español y utilidades básicas
+RUN apt-get update && \
+    apt-get install -y tesseract-ocr tesseract-ocr-spa git && \
+    apt-get clean
 
-# Establecemos el perfil de Spring a 'docker'
-ENV SPRING_PROFILES_ACTIVE=docker
+# Copia solo el JAR generado previamente
+COPY services/ocr-service/target/ocr-service-0.0.1-SNAPSHOT.jar app.jar
 
-# Compila el proyecto con Maven (solo el microservicio ocr-service)
-RUN mvn clean package -DskipTests
-
-# Ejecuta el JAR generado (asumiendo estructura estándar de Spring Boot)
-CMD ["java", "-jar", "target/ocr-service-0.0.1-SNAPSHOT.jar"]
+# Comando por defecto
+CMD ["java", "-Dspring.profiles.active=docker", "-jar", "app.jar"]

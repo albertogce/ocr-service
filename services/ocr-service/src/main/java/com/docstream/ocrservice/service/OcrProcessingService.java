@@ -1,7 +1,8 @@
 package com.docstream.ocrservice.service;
 
-import com.docstream.ocrservice.dto.DocumentProcessingEvent;
+import com.docstream.commondata.dto.DocumentProcessingEvent;
 import io.micrometer.core.instrument.MeterRegistry;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -11,11 +12,8 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class OcrProcessingService {
 
-    private final MeterRegistry meterRegistry;
-
-    public OcrProcessingService(MeterRegistry meterRegistry) {
-        this.meterRegistry = meterRegistry;
-    }
+    @Autowired
+    private MeterRegistry meterRegistry;
 
     public DocumentProcessingEvent processOcr(DocumentProcessingEvent event) {
         long startTime = System.nanoTime();

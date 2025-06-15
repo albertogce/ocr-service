@@ -1,6 +1,6 @@
 package com.docstream.ocrservice.listener;
 
-import com.docstream.ocrservice.dto.DocumentProcessingEvent;
+import com.docstream.commondata.dto.DocumentProcessingEvent;
 import com.docstream.ocrservice.service.OcrProcessingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.docstream.parserservice.dto;
+package com.docstream.commondata.dto;
 
 import lombok.Data;
 
@@ -12,11 +12,10 @@ public class DocumentProcessingEvent {
     private UUID documentId;
     private String rawFilePath;
     private String extractedText;
-    private Map<String, Object> parsedData;
+    private Document parsedData;
     private List<String> validationErrors;
     private Map<String, Object> enrichedData;
     private Instant timestamp;
     private ProcessingStage stage;
-
 
 }

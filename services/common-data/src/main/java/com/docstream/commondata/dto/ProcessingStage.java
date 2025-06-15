@@ -1,4 +1,4 @@
-package com.docstream.ocrservice.dto;
+package com.docstream.commondata.dto;
 
 public enum ProcessingStage {
     RECEIVED,

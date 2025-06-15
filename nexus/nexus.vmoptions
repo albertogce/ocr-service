@@ -1,0 +1,3 @@
+-Dnexus.scripts=/opt/sonatype/nexus/setup
+-Dnexus.script.auto=true
+-Dkaraf.startLocalConsole=false

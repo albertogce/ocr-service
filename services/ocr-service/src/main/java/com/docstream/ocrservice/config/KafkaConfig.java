@@ -1,6 +1,6 @@
 package com.docstream.ocrservice.config;
 
-import com.docstream.ocrservice.dto.DocumentProcessingEvent;
+import com.docstream.commondata.dto.DocumentProcessingEvent;
 import org.apache.kafka.common.TopicPartition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
