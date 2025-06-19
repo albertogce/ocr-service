@@ -9,6 +9,7 @@ import java.util.UUID;
 
 @Data
 public class DocumentProcessingEvent {
+
     private UUID documentId;
     private String rawFilePath;
     private String extractedText;

@@ -18,7 +18,7 @@ services:
       - --node-id=0
       - --check=false
       - --kafka-addr=INSIDE://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
-      - --advertise-kafka-addr=INSIDE://redpanda:29092,OUTSIDE://host.docker.internal:9092
+      - --advertise-kafka-addr=INSIDE://redpanda:29092,OUTSIDE://localhost:9092
     
   redpanda-console:
     image: docker.redpanda.com/redpandadata/console:latest
@@ -37,6 +37,21 @@ services:
       POSTGRES_DB: docstream
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+  dbgate:
+      image: dbgate/dbgate
+      ports:
+        - "3001:3000"
+      depends_on:
+        - postgres
+      environment:
+        CONNECTIONS: con1
+        LABEL_con1: DocStream
+        SERVER_con1: postgres
+        USER_con1: user
+        PASSWORD_con1: password
+        PORT_con1: 5432
+        ENGINE_con1: postgres@dbgate-plugin-postgres
 
   prometheus:
     image: prom/prometheus
@@ -64,8 +79,6 @@ services:
 
   maven-uploader:
     image: maven:3.9.9-eclipse-temurin-21
-    depends_on:
-      - nexus
     volumes:
       - ./services/common-data:/workspace/common-data
       - ./config:/scripts

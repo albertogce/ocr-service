@@ -1,6 +1,7 @@
 package com.docstream.ocrservice.service;
 
 import com.docstream.commondata.dto.DocumentProcessingEvent;
+import com.docstream.commondata.dto.ProcessingStage;
 import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,9 +22,9 @@ public class OcrProcessingService {
         try {
             String extractedText = runTesseract(event.getRawFilePath());
             event.setExtractedText(extractedText);
+            event.setStage(ProcessingStage.OCR);
 
             meterRegistry.counter("ocr.documents.processed").increment();
-
         } catch (Exception e) {
             meterRegistry.counter("ocr.errors").increment();
             throw new RuntimeException("OCR processing failed", e);

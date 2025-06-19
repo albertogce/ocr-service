@@ -41,9 +41,10 @@
 
 **Access dashboards:**
 
+- **Redpanda**: http://localhost:8080
 - **Grafana**: http://localhost:3000 (admin/admin)
 - **Prometheus**: http://localhost:9090
-- **PostgreSQL**: localhost:5432 (user: user, password: password)
+- **DbGate**: http://localhost:3001
 
 ---
 
@@ -53,6 +54,7 @@ As of today, the project contains:
 - **Text to image recognition**
 - **Parts of code with reactive programming**
 - **Communication between microservices based on Kafka's events**
+- **Data storage in the PostgreSQL database**
 
 ---
 

@@ -9,7 +9,7 @@ echo Levantando servicios base con docker-compose (redpanda, postgres, nexus, et
 :: Levanta los servicios iniciales en segundo plano
 docker-compose up -d redpanda redpanda-console postgres prometheus grafana nexus maven-uploader
 
-echo Esperando que Nexus y servicios estén listos...
+echo Esperando que Nexus y servicios esten listos...
 
 :wait_nexus
 curl -s http://localhost:8081 > nul
@@ -30,6 +30,10 @@ cd ..\..
 echo Levantando tesseract-service...
 
 docker-compose up -d tesseract-service
+
+echo Levantando DbGate...
+
+docker-compose up -d dbgate
 
 echo Todo listo.
 

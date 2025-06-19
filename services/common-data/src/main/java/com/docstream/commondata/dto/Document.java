@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -17,7 +19,10 @@ import java.util.UUID;
         @JsonSubTypes.Type(value = InvoiceDocument.class, name = "invoiceDocument")
 })
 @Data
-public abstract class Document {
+public abstract class Document implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     protected UUID id;
     protected LocalDate scannedDate;
