@@ -25,11 +25,17 @@ cd services\ocr-service
 
 call mvnw.cmd clean package -Dspring.profiles.active=docker -DskipTests
 
+cd ..
+
+cd grpc-uploader-service
+
+call mvnw.cmd clean package -Dspring.profiles.active=docker -DskipTests
+
 cd ..\..
 
-echo Levantando tesseract-service...
+echo Levantando ocr-service y grpc-uploader-service...
 
-docker-compose up -d tesseract-service
+docker-compose up -d ocr-service grpc-uploader-service
 
 echo Levantando DbGate...
 

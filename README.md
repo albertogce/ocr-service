@@ -14,20 +14,22 @@
 - **Prometheus + Grafana (observability)**
 - **Docker + Docker Compose (fully local, no cloud costs)**
 - **Lombok, MapStruct, OpenAPI, JUnit 5, Testcontainers**
+- **gRPC (communication between grpc-upload-service and OCRService)**
+- **React (frontend for file upload)**
+
 
 ---
 
 ## ⚙️ Architecture
 
 ```txt
-┌────────────┐    ┌────────────┐    ┌─────────────┐    ┌─────────────────┐
-│ OCRService │──▶│ ParserSvc  │──▶│ ValidatorSvc │──▶│ StorageService   │
-└────┬───────┘    └────┬───────┘    └────┬────────┘    └────────┬────────┘
-     │                 │                │                      │
-     ▼                 ▼                ▼                      ▼
-   Kafka            Kafka            Kafka                  PostgreSQL
- Topics:         Topics:         Topics:                  
- raw-docs     parsed-docs     validated-docs             
+┌───────────────┐    ┌────────────────────┐    ┌─────────────┐    ┌──────────────┐    ┌───────────────┐    ┌───────────────┐
+│    React      │──▶│ grpc-upload-service │──▶│  OCRService │──▶│  ParserSvc   │──▶│ ValidateSvc   │──▶│ StoreService  │
+└──────┬────────┘    └─────────┬──────────┘    └─────┬───────┘    └─────┬───────┘    └──────┬────────┘    └──────┬────────┘
+       │                       │                     │                  │                   │                    │
+       ▼                       ▼                     ▼                  ▼                   ▼                    ▼
+    HTTP (upload)         gRPC (o Kafka:        Kafka topic:         Kafka topic:      Kafka topic:           PostgreSQL
+                          raw-documents)        raw-documents        parsed-docs      validated-docs          (storage)
 
 ```
 
@@ -45,6 +47,7 @@
 - **Grafana**: http://localhost:3000 (admin/admin)
 - **Prometheus**: http://localhost:9090
 - **DbGate**: http://localhost:3001
+- **React Frontend**: http://localhost:3002
 
 ---
 
@@ -55,6 +58,7 @@ As of today, the project contains:
 - **Parts of code with reactive programming**
 - **Communication between microservices based on Kafka's events**
 - **Data storage in the PostgreSQL database**
+- **gRPC communication between grpc-upload-service and OCRService**
 
 ---
 
@@ -64,4 +68,5 @@ As of today, the project contains:
 - **Event retries using CircuitBreaker**
 - **Recognition and management of different types of images (invoices, payroll, etc.)**
 - **Data storage in PostgreSQL (or MongoDB)**
+- **React-based frontend for uploading files**
 ---

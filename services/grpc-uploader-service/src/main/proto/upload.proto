@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.docstream.grpc";
+option java_outer_classname = "UploadProto";
+
+service UploadService {
+  rpc UploadFile (FileRequest) returns (UploadResponse);
+}
+
+message FileRequest {
+  string filename = 1;
+  bytes content = 2;
+}
+
+message UploadResponse {
+  string message = 1;
+  bool success = 2;
+}

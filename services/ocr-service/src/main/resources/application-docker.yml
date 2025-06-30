@@ -1,3 +1,7 @@
 spring:
   kafka:
     bootstrap-servers: redpanda:29092
+
+tesseract:
+  data:
+    path: /tmp/tessdata_extracted

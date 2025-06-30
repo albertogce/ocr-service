@@ -11,7 +11,7 @@ import java.util.UUID;
 public class DocumentProcessingEvent {
 
     private UUID documentId;
-    private String rawFilePath;
+    private byte[] base64Data;
     private String extractedText;
     private Document parsedData;
     private List<String> validationErrors;

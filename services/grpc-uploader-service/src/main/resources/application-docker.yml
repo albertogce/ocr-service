@@ -1,0 +1,7 @@
+spring:
+  kafka:
+    bootstrap-servers: redpanda:29092
+
+ocr:
+  service:
+    host: ocr-service

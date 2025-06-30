@@ -85,15 +85,24 @@ services:
       - nexus-data:/nexus-data:ro
     entrypoint: ["/bin/bash", "/scripts/upload-common.sh"]
 
-  tesseract-service:
+  grpc-uploader-service:
     build:
       context: .
-      dockerfile: services/Tesseract/Dockerfile
-    container_name: tesseract-service
+      dockerfile: services/grpc-uploader-service/Dockerfile
+    container_name: grpc-uploader-service
     volumes:
       - ./testing:/app/images
     ports:
       - "8082:8082"
+
+  ocr-service:
+    build:
+      context: .
+      dockerfile: services/ocr-service/Dockerfile
+    container_name: ocr-service
+    ports:
+      - "8083:8083"
+      - "50052:50052"
 
 volumes:
   pgdata:

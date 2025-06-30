@@ -1,0 +1,35 @@
+server:
+  port: 8082
+
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+  kafka:
+    #    bootstrap-servers: host.docker.internal:9092
+#    consumer:
+#      group-id: ocr-consumer-group
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+#      properties:
+#        spring.json.trusted.packages: "*"
+#        spring.json.value.default.type: com.docstream.commondata.dto.DocumentProcessingEvent
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+docstream:
+  topics:
+    output: raw-documents
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  endpoint:
+    prometheus:
+      enabled: true
